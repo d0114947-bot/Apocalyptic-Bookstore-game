@@ -1,0 +1,13 @@
+.asset-loading-overlay,.opening-intro{position:fixed;inset:54px 0 0;display:grid;place-items:center;padding:24px;background:rgba(8,10,9,.88);backdrop-filter:blur(9px)}
+.asset-loading-overlay{z-index:110;color:#f6ead6;text-align:center}
+.asset-loading-overlay section{width:min(390px,90vw);padding:32px;border:1px solid rgba(221,183,125,.45);background:rgba(22,24,21,.94);box-shadow:0 18px 70px #0009}
+.loading-spark{display:block;color:#d9aa6e;font-size:30px;animation:loading-turn 8s linear infinite}
+.asset-loading-overlay h2{font-size:20px;margin:12px 0 8px}.asset-loading-overlay p{color:#c6bba9;margin:0 0 20px}
+.loading-track{height:5px;background:#3b3a34;overflow:hidden}.loading-track i{display:block;height:100%;background:#d2a46c;transition:width .2s ease}.asset-loading-overlay small{display:block;margin-top:9px;color:#d2a46c}
+.opening-intro{z-index:120;overflow:auto;background:radial-gradient(ellipse at 50% 25%,rgba(99,76,49,.32),transparent 52%),linear-gradient(120deg,rgba(9,11,10,.98),rgba(12,16,14,.95));color:#f5ead9}
+.opening-card{width:min(760px,94vw);max-height:calc(100dvh - 100px);overflow:auto;padding:clamp(22px,4vw,44px);border:1px solid #c7a06e;background:rgba(20,22,19,.94);box-shadow:0 0 42px rgba(221,170,102,.22),0 24px 90px #000b}
+.opening-eyebrow{color:#d5ab75;letter-spacing:.16em;font-size:11px}.opening-card h1{font-size:clamp(24px,4vw,38px);line-height:1.3;margin:14px 0 20px;color:#f3d3a2}.opening-card p{font-size:15px;line-height:1.9;color:#e1d7c8;margin:0 0 12px}
+.opening-guide{display:grid;gap:8px;margin:20px 0;padding:16px 18px;border-left:2px solid #d5a46a;background:rgba(255,255,255,.045);color:#ded3c1;font-size:14px;line-height:1.65}.opening-guide b{color:#ecc68f}.opening-card blockquote{margin:16px 0 22px;color:#d8b982;font-style:italic}.opening-actions{display:flex;flex-wrap:wrap;gap:10px}.opening-actions button{display:flex;align-items:center;gap:10px}
+.opening-load-status{display:block;margin:-10px 0 14px;color:#d8b982}
+@keyframes loading-turn{to{transform:rotate(360deg)}}
+@media(max-width:600px){.opening-intro{inset:48px 0 0;padding:12px}.opening-card{max-height:calc(100dvh - 70px);padding:22px}.opening-card p{font-size:14px}.opening-actions{display:grid}.opening-actions button{justify-content:center}}

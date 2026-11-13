@@ -30,11 +30,12 @@ jobs:
       - run: pnpm exec vite build --base=/Apocalyptic-Bookstore-game/
       - name: Verify published image assets
         run: |
-          test -s dist/assets/bookstore-overview.jpg
-          test -s dist/assets/book-cafe.jpg
-          test -s dist/assets/telescope.png
-          test -s dist/assets/cast/cat-dog-1.png
-          test -s dist/assets/蔬菜種植盆.png
+          test -s dist/assets/bookstore-overview.webp
+          test -s dist/assets/book-cafe.webp
+          test -s dist/assets/telescope.webp
+          test -s dist/assets/cast/cat-dog-1.webp
+          test -s dist/assets/cast/survivor-01.webp
+          test -s dist/assets/蔬菜種植盆.webp
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
