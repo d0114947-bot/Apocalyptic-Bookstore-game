@@ -36,6 +36,14 @@ jobs:
           test -s dist/assets/cast/cat-dog-1.webp
           test -s dist/assets/cast/survivor-01.webp
           test -s dist/assets/蔬菜種植盆.webp
+          test -s dist/assets/prologue/scene-01.webp
+          test -s dist/assets/prologue/scene-02.webp
+          test -s dist/assets/prologue/scene-03.webp
+          test -s dist/assets/prologue/scene-04.webp
+          test -s dist/assets/prologue/scene-05.webp
+          test -s dist/assets/prologue/scene-06.webp
+          test -s dist/assets/prologue/scene-07.webp
+          test -s dist/assets/prologue/scene-08.webp
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

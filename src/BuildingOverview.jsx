@@ -13,13 +13,13 @@ export const ROOMS = [
   { id:'manager',level:'B1',name:'店長休息室',english:'MANAGER ROOM',icon:'🛏️',status:'舒適度・手札・休息',image:asset('manager-room.webp'),hotspot:'manager' },
 ];
 
-export default function BuildingOverview({selectedRoom,onSelectRoom,phase,difficulty='easy',musicMuted=false,onToggleMusic=()=>{},onRadio=()=>{},incomingCount=0,onCloseDay,pets=[],weather={},manuscript=0,progressOpen,onToggleProgress,unfinishedTasks=[],characterImage,onOpenJournal,journalText,children}) {
+export default function BuildingOverview({selectedRoom,onSelectRoom,phase,difficulty='easy',musicMuted=false,onToggleMusic=()=>{},onRadio=()=>{},incomingCount=0,onCloseDay,pets=[],weather={},manuscript=0,progressOpen,onToggleProgress,unfinishedTasks=[],characterImage,onOpenJournal,journalText,onCycleInfo=()=>{},children}) {
   const [shopkeeperOffset,setShopkeeperOffset]=useState({x:0,y:0}),[shopkeeperDrag,setShopkeeperDrag]=useState(null);
   const nightImages={roof:asset('屋頂露臺-晚上.webp'),reading:asset('二樓閱覽室-晚上.webp'),store:asset('一樓咖啡書店-晚上.webp')};
   const roomImage=phase==='night'?(nightImages[selectedRoom?.id]||selectedRoom?.image):selectedRoom?.image;
   if(selectedRoom) return <section className="full-room-scene" style={{'--room-photo':'url("'+roomImage+'")'}}>
     <div className="room-scene-shade"/>
-    <button className="scene-back" onClick={()=>onSelectRoom(null)}><ArrowLeft size={17}/> 回到書店全景</button>
+    <button className="scene-back" data-tutorial-target="overview-back" onClick={()=>onSelectRoom(null)}><ArrowLeft size={17}/> 回到書店全景</button>
     <div className="scene-topline"><span>{selectedRoom.level} / {selectedRoom.english}</span><span>{weather.season}・{weather.sky}・{phase==='day'?'白天':'夜晚'}</span></div>
     <div className="scene-title"><span>{selectedRoom.icon}</span><div><h2>{selectedRoom.name}</h2><p>{selectedRoom.status}</p></div></div>
     {selectedRoom.id==='store'&&phase==='night'&&<div className="closed-sign"><LockKeyhole size={16}/> 已打烊，白天再接待客人。</div>}
@@ -35,13 +35,13 @@ export default function BuildingOverview({selectedRoom,onSelectRoom,phase,diffic
         <div className="marquee task-marquee"><span>{unfinishedTasks.length?`待辦提示：${unfinishedTasks.join('　・　')}`:'目前沒有待處理事項，留意天氣與物資變化。'}</span></div>
       </div>
       <button className="overview-night-action" onClick={()=>phase==='night'?onSelectRoom(ROOMS.find(room=>room.id==='manager')):onCloseDay()} disabled={phase==='day'&&incomingCount>0}>{phase==='night'?<>回房<br/>休息</>:'進入夜晚'} <span>{phase==='night'?'☾':'→'}</span></button>
-      <div className="overview-conditions"><span className="overview-caption">書店全景</span><strong>{weather.season||'春季'}　{weather.sky||'晴天'}</strong><span>{phase==='day'?'白天':'夜晚'}　·　第 {weather.day||1} 天</span></div>
+      <button type="button" className="overview-conditions" data-tutorial-target="cycle-check" onClick={onCycleInfo}><span className="overview-caption">書店全景</span><strong>{weather.season||'春季'}　{weather.sky||'晴天'}</strong><span>{phase==='day'?'白天':'夜晚'}　·　第 {weather.day||1} 天</span></button>
       <div className="progress-control"><div className="overview-tools"><button aria-label="顯示手稿撰寫進度" title="手稿撰寫進度" onClick={onToggleProgress}>✒</button><span className="overview-difficulty">遊戲難度・{difficultyNames[difficulty]||difficultyNames.easy}</span><button className="overview-music-toggle" aria-label={musicMuted?'繼續播放音樂':'靜音音樂'} title={musicMuted?'繼續播放音樂':'靜音音樂'} aria-pressed={musicMuted} onClick={onToggleMusic}>{musicMuted?'♫̸':'♫'}</button></div>{progressOpen&&<div className="manuscript-meter"><span>手稿撰寫進度</span><strong>{manuscript}%</strong><i><b style={{width:manuscript+'%'}}/></i><small>{manuscript>=100?'結局已完成':'100% +10%　・　90% +8%　・　80% +5%　・　70% +3%　・　60% +1%（每晚，依最低資源計算）'}</small></div>}</div>
     </div>
     <div className={'panorama-frame '+(phase==='night'?'night-panorama':'')}><div className="panorama-art" style={{backgroundImage:`url("${asset(phase==='night'?'書店全景導覽-晚上.webp':'bookstore-overview.webp')}")`}}/>
       <div className="floor-marker marker-roof">RF <span>屋頂</span></div><div className="floor-marker marker-reading">2F <span>閱覽室</span></div><div className="floor-marker marker-first">1F <span>書店</span></div><div className="floor-marker marker-base">B1 <span>地下室</span></div>
       {characterImage&&<div className="panorama-shopkeeper" style={{transform:`translate(${shopkeeperOffset.x}px,${shopkeeperOffset.y}px)`}} onPointerDown={e=>{e.currentTarget.setPointerCapture(e.pointerId);setShopkeeperDrag({x:e.clientX,y:e.clientY,startX:shopkeeperOffset.x,startY:shopkeeperOffset.y});}} onPointerMove={e=>{if(shopkeeperDrag)setShopkeeperOffset({x:shopkeeperDrag.startX+e.clientX-shopkeeperDrag.x,y:shopkeeperDrag.startY+e.clientY-shopkeeperDrag.y});}} onPointerUp={()=>setShopkeeperDrag(null)}><img src={characterImage} alt="店長"/></div>}
-      {ROOMS.map(room=><button key={room.id} className={'scan-room room-'+room.hotspot+' '+(room.id==='store'&&incomingCount>0&&phase==='day'?'room-arrival':'')} onClick={()=>onSelectRoom(room)} aria-label={'進入'+room.name}>
+      {ROOMS.map(room=><button key={room.id} data-tutorial-target={room.id==='storage'?'storage-entry':room.id==='machine'?'machine-entry':undefined} className={'scan-room room-'+room.hotspot+' '+(room.id==='store'&&incomingCount>0&&phase==='day'?'room-arrival':'')} onClick={()=>onSelectRoom(room)} aria-label={'進入'+room.name}>
         <span className="scan-beam"/><span className="scan-label"><b>{room.icon} {room.name}</b><small>{room.status}</small></span>
         {!!pets.filter(pet=>pet.roomId===room.id).length&&<span className="panorama-pet-dots">{pets.filter(pet=>pet.roomId===room.id).map(p=><img key={p.id} src={p.image} alt={p.name}/>)}</span>}
       </button>)}
