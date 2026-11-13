@@ -5,6 +5,7 @@ import BuildingOverview, { ROOMS } from './BuildingOverview.jsx';
 
 const SAVE_KEY='bookstore-shelter-save-v2';
 const asset=file=>import.meta.env.BASE_URL+'assets/'+file;
+const optimizedImagePath=image=>typeof image==='string'?image.replace(/\.png(?=($|[?#]))/i,'.webp'):image;
 const clamp=n=>Math.max(0,Math.min(100,Math.round(n)));
 function manuscriptGain(resources){const weakest=Math.min(resources.power,resources.water,resources.morale);return weakest>=100?10:weakest>=90?8:weakest>=80?5:weakest>=70?3:weakest>=60?1:0;}
 function manuscriptRuleText(resources){const gain=manuscriptGain(resources);return gain?`三項核心資源最低 ${Math.min(resources.power,resources.water,resources.morale)}%，手稿今晚增加 ${gain}%。規則：100% +10%、90% +8%、80% +5%、70% +3%、60% +1%。`:'三項核心資源未達 60%，手稿今晚暫停。資源越穩定，完成速度越快。';}
@@ -83,7 +84,8 @@ function loadSave(){
   if(!saved?.nickname||!saved?.resources||!saved?.books)return newGame();
   const base=newGame(saved.nickname,saved.season,saved.gender||'female');
   const books={...saved.books};if(books['農業圖鑑']&&!books['給排水系統解析'])books['給排水系統解析']=books['農業圖鑑'];delete books['農業圖鑑'];
-  return {...base,...saved,difficulty:saved.difficulty||'easy',books,phase:saved.phase||'day',weather:saved.weather||base.weather,supplies:{...base.supplies,...saved.supplies},incoming:(saved.incoming||[]).map(v=>v.book==='農業圖鑑'?{...v,book:'給排水系統解析'}:v),lodgers:saved.lodgers||[],crops:saved.crops||[],pets:Array.isArray(saved.pets)?saved.pets.filter(p=>p.roomId):[],visitorBoost:saved.visitorBoost||0,relationships:saved.relationships||{},rescuedCount:saved.rescuedCount||0,petFedDay:saved.petFedDay??(saved.petCareDay??0),petPlayedDay:saved.petPlayedDay??(saved.petCareDay??0)};
+  const imageFor=person=>optimizedImagePath(person.image)||people.find(p=>p.id===(person.characterId||person.id||'').replace(/-family$/,''))?.image;
+  return {...base,...saved,difficulty:saved.difficulty||'easy',books,phase:saved.phase||'day',weather:saved.weather||base.weather,supplies:{...base.supplies,...saved.supplies},incoming:(saved.incoming||[]).map(v=>({...v,image:imageFor(v),...(v.book==='農業圖鑑'?{book:'給排水系統解析'}:{})})),lodgers:(saved.lodgers||[]).map(p=>({...p,image:imageFor(p)})),crops:saved.crops||[],pets:Array.isArray(saved.pets)?saved.pets.filter(p=>p.roomId).map(p=>({...p,image:optimizedImagePath(p.image)||animals.find(a=>p.id?.endsWith(a.id))?.image||asset('cast/cat-dog-1.webp')})):[],visitorBoost:saved.visitorBoost||0,relationships:Object.fromEntries(Object.entries(saved.relationships||{}).map(([key,value])=>[key,{...value,person:value.person?{...value.person,image:imageFor(value.person)}:value.person}])),rescuedCount:saved.rescuedCount||0,petFedDay:saved.petFedDay??(saved.petCareDay??0),petPlayedDay:saved.petPlayedDay??(saved.petCareDay??0)};
  }catch{return newGame();}
 }
 const foodNames={food:'糧食',vegetables:'蔬菜',fruits:'水果'};
@@ -122,7 +124,7 @@ export default function App(){
  },[room?.id,game.phase,game.weather?.sky,game.ending]);
  function preloadGameImages(nextGame){
   setAssetLoading(true);setAssetLoadProgress(0);
-  const files=[nextGame.phase==='night'?'書店全景導覽-晚上.webp':'bookstore-overview.webp',...ROOMS.map(room=>room.image),...['屋頂露臺-晚上.webp','二樓閱覽室-晚上.webp','一樓咖啡書店-晚上.webp'],...nextGame.incoming.map(person=>person.image),...nextGame.pets.map(pet=>pet.image),'cast/shopkeeper-'+nextGame.gender+'.webp'].map(file=>file.startsWith('/')||file.startsWith('http')?file:asset(file));
+  const files=[nextGame.phase==='night'?'書店全景導覽-晚上.webp':'bookstore-overview.webp',...ROOMS.map(room=>room.image),...['屋頂露臺-晚上.webp','二樓閱覽室-晚上.webp','一樓咖啡書店-晚上.webp'],...nextGame.incoming.map(person=>person.image),...nextGame.pets.map(pet=>pet.image),'cast/shopkeeper-'+nextGame.gender+'.webp'].filter(file=>typeof file==='string'&&file.length>0).map(file=>file.startsWith('/')||file.startsWith('http')?file:asset(file));
   const sources=[...new Set(files)],total=sources.length;let loaded=0,finished=false;
   const complete=()=>{if(finished)return;finished=true;setAssetLoadProgress(100);setAssetLoading(false);};
   const tasks=sources.map(src=>new Promise(resolve=>{const img=new Image();let settled=false;const done=()=>{if(settled)return;settled=true;loaded++;setAssetLoadProgress(Math.round(loaded/total*100));resolve();};img.onload=done;img.onerror=done;img.src=src;if(img.complete)done();}));
