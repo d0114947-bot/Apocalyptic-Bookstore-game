@@ -12,12 +12,12 @@ function manuscriptRuleText(resources){const gain=manuscriptGain(resources);retu
 const DIFFICULTIES={easy:{label:'童話與溫拿鐵',drain:1.1,trade:1,trouble:.08,lodger:.1,incident:.07,typhoon:.04,petGift:0},normal:{label:'求生手冊與黑美式',drain:1.22,trade:.88,trouble:.13,lodger:.24,incident:.18,typhoon:.07,petGift:0},hard:{label:'殘破史詩與無糖配方',drain:1.36,trade:.78,trouble:.2,lodger:.4,incident:.38,typhoon:.12,petGift:.35},nightmare:{label:'燃盡秩序',drain:1.52,trade:.68,trouble:.28,lodger:.6,incident:.62,typhoon:.18,petGift:.5}};
 const bgmTracks=['Warm Afternoon Sun - usesuno.com.mp3','Warm Afternoon Sun - usesuno.com2.mp3','Dusty Afternoon - usesuno.com1.mp3','Dusty Afternoon - usesuno.com.mp3'];
 const prologueSlides=[
- {image:'prologue/scene-01.webp',text:['夜深了，街道一盞盞暗下去，只有這間書店的窗裡還留著暖光。你熟悉這裡每一道木頭的聲音，也記得每本書被放回書架時，封面輕輕碰在一起的聲音。','你曾以為，明天不過是再開一次門、替客人找一本他想讀的書。那時候的平凡如此理所當然，直到世界再也沒有照原本的樣子醒來。','[[YOU]]望著這扇熟悉的門，努力把不安壓進心底。若還有人在外面等待，這裡或許就能成為他們暫時停靠的地方。']},
- {image:'prologue/scene-02.webp',text:['那天，你原本只是在整理新到的書。紙箱裡帶著淡淡的紙味，午後的光落在書頁邊緣，你把一本本書分類、擦拭，再放回熟悉的位置。','生活很忙，卻安穩得讓人忘了珍惜。你想著晚些時候要泡杯咖啡，也想著明天或許會有老客人回來。那時的你，還不知道這會是最後一個如此平靜的午後。']},
- {image:'prologue/scene-03.webp',fadeImage:'prologue/scene-04.webp',text:['街上先是傳來急促的警報，接著人群奔逃、電力中斷，感染者的影子從雨幕裡逼近。警笛被雨聲切碎，遠處有人呼喊，接著只剩下不規則的腳步聲和玻璃破裂的聲響。','你站在窗邊，手裡還握著剛整理好的書。腦中一片空白，心跳卻快得像要撞開胸口。想逃的念頭只停留了一瞬；街上有人跌倒了，而書店的燈還亮著。']},
- {image:'prologue/scene-05.webp',fadeImage:'prologue/scene-06.webp',text:['你拉下鐵門，帶著幾位倖存者躲進書店。奇異的光沿著牆面亮起，老書店的結構變得堅固，成了街區裡少數能抵禦危險的避難所。','金色光紋沿著牆角與梁柱慢慢展開，外頭的撞擊聲逐漸遠去。你仍然害怕，手心也還在發抖；但當身後的人終於能喘一口氣，你知道自己不能只顧著害怕。這扇門保護了你們，也把一份新的責任交到你手上。']},
- {image:'prologue/scene-07.webp',text:['書架上的知識也有了新的用途：電學書能協助修復發電設備，給排水手冊能維護水管，故事與音樂可以安定疲憊的人心。你開始用另一種眼光看待這些熟悉的書脊：它們可能是一盞燈、一杯乾淨水，也可能是某個人熬過漫長夜晚的理由。','每次用書或拿去交易，都會消耗館藏；留下一本書，也許就多保住一段重要的知識。每次伸手取下一本書，你都得想一想：眼前的急需，和留給明天的可能，哪一個更不能失去？']},
- {image:'prologue/scene-08.webp',text:['白天，你會接待倖存者，決定交易、收留或伸出援手。每個走進門的人都有自己的故事，也可能帶來新的消息、物資，或一道更難回答的選擇。','夜晚，你可以安排修繕、播種、照顧動物，再讓大家休息。你得留意電力、乾淨水、舒適度與食物，讓有限的資源撐過下一天。不是每件事都能一次做好；有時能守住一盞燈，就已經替某個人留下了方向。','你望向仍亮著燈的書架，心裡浮現一個念頭：只要還有人願意翻開一本書，明天就還有別的可能。']},
+ {image:'prologue/scene-01.webp',text:['夜深了，街道一盞盞暗下去，只有這間書店的窗裡還留著暖光。你熟悉這裡每一道木頭的聲音，也記得每本書被放回書架時，封面輕輕碰在一起的聲音。','「晚一點再讀吧，明天還有時間。」你曾這樣對自己說。那時你以為，明天不過是再開一次門、替客人找一本他想讀的書；平凡如此理所當然，直到世界再也沒有照原本的樣子醒來。','[[YOU]]望著這扇熟悉的門，努力把不安壓進心底。若還有人在外面等待，這裡或許就能成為他們暫時停靠的地方。','（窗裡的燈，成了黑暗街道上最後一點溫度。）']},
+ {image:'prologue/scene-02.webp',text:['那天，你原本只是在整理新到的書。紙箱裡帶著淡淡的紙味，午後的光落在書頁邊緣，你把一本本書分類、擦拭，再放回熟悉的位置。','「這本應該放在靠窗那排。」你低聲說，像是在和老朋友確認位置。生活很忙，卻安穩得讓人忘了珍惜；你還想著晚些時候要泡杯咖啡，也想著明天或許會有老客人回來。','那時的你還不知道，這會是最後一個如此平靜的午後。【有些日常，只有失去之後才知道多珍貴。】']},
+ {image:'prologue/scene-03.webp',fadeImage:'prologue/scene-04.webp',text:['街上先是傳來急促的警報，接著人群奔逃、電力中斷，感染者的影子從雨幕裡逼近。警笛被雨聲切碎，遠處有人呼喊，接著只剩下不規則的腳步聲和玻璃破裂的聲響。','「救命！有人在裡面嗎？」雨幕中傳來陌生人的呼喊。你站在窗邊，手裡還握著剛整理好的書；腦中一片空白，心跳卻快得像要撞開胸口。','想逃的念頭只停留了一瞬。街上有人跌倒了，而書店的燈還亮著。你抓起門邊的鑰匙，對著雨裡的人大喊：「快過來！不要停下來！」','（警報聲漸遠，雨聲卻像整座城市都在喘息。）']},
+ {image:'prologue/scene-05.webp',fadeImage:'prologue/scene-06.webp',text:['你拉下鐵門，帶著幾位倖存者躲進書店。奇異的光沿著牆面亮起，老書店的結構變得堅固，成了街區裡少數能抵禦危險的避難所。','「這裡真的安全嗎？」有人壓低聲音問。你看見對方仍在發抖，也感覺自己的手心沒有停止顫動，卻回答：「我不知道能保護多久，但今晚我們先一起守住這裡。」','金色光紋沿著牆角與梁柱慢慢展開，外頭的撞擊聲逐漸遠去。你仍然害怕；但當身後的人終於能喘一口氣，你知道自己不能只顧著害怕。【這扇門保護了你們，也把新的責任交到你手上。】','（光沿著書架移動，像有人在黑暗裡點亮一條回家的路。）']},
+ {image:'prologue/scene-07.webp',text:['書架上的知識也有了新的用途：電學書能協助修復發電設備，給排水手冊能維護水管，故事與音樂可以安定疲憊的人心。你開始用另一種眼光看待這些熟悉的書脊：它們可能是一盞燈、一杯乾淨水，也可能是某個人熬過漫長夜晚的理由。','「這些書，真的能幫上忙嗎？」有人輕聲問。你指尖停在書脊上，沒有立刻回答；也許答案要靠你們一起找出來。','每次用書或拿去交易，都會消耗館藏；留下一本書，也許就多保住一段重要的知識。每次伸手取下一本書，你都得想一想：眼前的急需，和留給明天的可能，哪一個更不能失去？【知識會變成工具，也會變成希望。】']},
+ {image:'prologue/scene-08.webp',text:['白天，你會接待倖存者，決定交易、收留或伸出援手。每個走進門的人都有自己的故事，也可能帶來新的消息、物資，或一道更難回答的選擇。','夜晚，你可以安排修繕、播種、照顧動物，再讓大家休息。你得留意電力、乾淨水、舒適度與食物，讓有限的資源撐過下一天。不是每件事都能一次做好；有時能守住一盞燈，就已經替某個人留下了方向。','「只要還有人願意翻開一本書，明天就還有別的可能。」你望向仍亮著燈的書架，決定先把今天守好，再為明天留一頁空白。','（門外依然危險。門內的燈，仍然亮著。）']},
 ];
 const plantedPotImages=['蔬菜種植盆.webp','小白菜種植盆.webp','胡蘿蔔種植盆.webp','草莓種植盆.webp'];
 const startingBooks={'基礎電學':2,'流體力學':2,'給排水系統解析':1,'心理學':2,'犯罪心理學':1,'音樂 CD':2,'末世雜誌':2};
@@ -111,15 +111,15 @@ export default function App(){
   const [openingIntro,setOpeningIntro]=useState(false),[prologueIndex,setPrologueIndex]=useState(0),[prologueClosing,setPrologueClosing]=useState(false),[gameReveal,setGameReveal]=useState(false),[tutorialActive,setTutorialActive]=useState(false),[tutorialStep,setTutorialStep]=useState(0),[tutorialSpot,setTutorialSpot]=useState(null),[assetLoading,setAssetLoading]=useState(false),[assetLoadProgress,setAssetLoadProgress]=useState(0);
  useEffect(()=>{if(game.nickname)try{localStorage.setItem(SAVE_KEY,JSON.stringify(game));}catch(e){console.error('自動保存失敗',e);}},[game]);
  useEffect(()=>{
-   const endingMusic=game.ending&&!showLogin,prologueHope=openingIntro&&prologueIndex===prologueSlides.length-1;
-   const source=endingMusic||prologueHope?asset('Morning Light at the Cafe - usesuno.com.mp3'):asset(musicTrack);
+   const endingMusic=game.ending&&!showLogin,prologueMusic=openingIntro;
+   const source=endingMusic?asset('Morning Light at the Cafe - usesuno.com.mp3'):prologueMusic?asset('Warm Afternoon Sun - usesuno.com.mp3'):asset(musicTrack);
   let audio=bgmRef.current;
   if(!audio||audio.dataset.source!==source){
-    const next=new Audio(source);next.loop=endingMusic||prologueHope;next.volume=0;next.dataset.source=source;next.onended=()=>{if(!endingMusic&&!prologueHope&&!musicMuted)setMusicTrack(current=>random(bgmTracks.filter(track=>track!==current)));};bgmRef.current=next;
-   if(!musicMuted)next.play().then(()=>{let v=0;const fade=setInterval(()=>{v=Math.min(.32,v+.025);next.volume=v;if(v>=.32)clearInterval(fade);},90);}).catch(()=>{});
+    const next=new Audio(source);next.loop=endingMusic||prologueMusic;next.volume=prologueMusic?.32:0;next.dataset.source=source;next.onended=()=>{if(!endingMusic&&!prologueMusic&&!musicMuted)setMusicTrack(current=>random(bgmTracks.filter(track=>track!==current)));};bgmRef.current=next;
+   if(!musicMuted)next.play().then(()=>{if(!prologueMusic){let v=0;const fade=setInterval(()=>{v=Math.min(.32,v+.025);next.volume=v;if(v>=.32)clearInterval(fade);},90);}}).catch(()=>{});
    if(audio){const old=audio;let v=old.volume;const fade=setInterval(()=>{v=Math.max(0,v-.04);old.volume=v;if(!v){clearInterval(fade);old.pause();}},60);}
    audio=next;
-  }else if(musicMuted){audio.pause();audio.volume=0;}else if(audio.paused){audio.play().then(()=>{audio.volume=.32;}).catch(()=>{});}
+  }else{audio.loop=endingMusic||prologueMusic;if(musicMuted){audio.pause();audio.volume=0;}else if(audio.paused){audio.volume=prologueMusic?.32:audio.volume;audio.play().then(()=>{if(!prologueMusic)audio.volume=.32;}).catch(()=>{});}}
   return ()=>{};
   },[game.ending,showLogin,musicTrack,musicMuted,openingIntro,prologueIndex]);
  useEffect(()=>{
@@ -163,7 +163,7 @@ export default function App(){
    {title:'檢查乾淨水',text:'乾淨的水是每天都不可缺少的資源，必須維持穩定供應。'},
    {title:'認識夜間經營',text:room?'先回到全景，再查看白天與夜晚的狀態；這裡只認識節奏，不會推進時間或消耗物資。':'白天與夜晚有不同的經營節奏。妥善安排每一天，才能讓書店持續運作。'},
   ];
-  function handleTutorialClick(event){if(!tutorialActive)return;const clicked=event.target.closest('[data-tutorial-target]'),target=clicked?.dataset.tutorialTarget;const allowed=target===tutorialTarget||(tutorialStep===4&&room&&target==='overview-back');if(!allowed){event.preventDefault();event.stopPropagation();return;}if(target==='overview-back'||(tutorialStep===2&&target==='machine-entry'))return;const next=tutorialStep+1;setTutorialStep(next);setGame(current=>({...current,onboardingStage:'tutorial',tutorialStep:next}));if(tutorialStep===1)setRoom(null);}
+  function handleTutorialClick(event){if(!tutorialActive)return;const clicked=event.target instanceof Element?event.target.closest('[data-tutorial-target]'):null,target=clicked?.dataset.tutorialTarget;const allowed=target===tutorialTarget||(tutorialStep===4&&room&&target==='overview-back');if(!allowed){event.preventDefault();event.stopPropagation();return;}if(target==='overview-back'||(tutorialStep===2&&target==='machine-entry'))return;const next=tutorialStep+1;setTutorialStep(next);setGame(current=>({...current,onboardingStage:'tutorial',tutorialStep:next}));if(tutorialStep===1)setRoom(null);}
   function finishTutorial(){setTutorialActive(false);setRoom(null);setGame(current=>({...current,onboardingStage:'complete',prologueIndex:prologueSlides.length-1,tutorialStep:5}));}
   useEffect(()=>{if(!tutorialActive||tutorialStep>=5||!tutorialTarget)return;let frame=0;const update=()=>{const target=document.querySelector(`[data-tutorial-target="${tutorialTarget}"]`);if(!target){setTutorialSpot(null);return;}const rect=target.getBoundingClientRect();setTutorialSpot({x:rect.left+rect.width/2,y:rect.top+rect.height/2,w:rect.width,h:rect.height});};frame=requestAnimationFrame(update);window.addEventListener('resize',update);return()=>{cancelAnimationFrame(frame);window.removeEventListener('resize',update);};},[tutorialActive,tutorialStep,tutorialTarget,room]);
  function toggleMusic(){const next=!musicMuted;setMusicMuted(next);const audio=bgmRef.current;if(audio){if(next)audio.pause();else audio.play().catch(()=>{});}}
@@ -315,7 +315,7 @@ export default function App(){
   {assetLoading&&<div className="asset-loading-overlay" role="status" aria-live="polite"><section><span className="loading-spark">✳</span><h2>正在為避難所點亮燈光</h2><p>整理房間、人物與書架的影像…</p><div className="loading-track"><i style={{width:assetLoadProgress+'%'}}/></div><small>{assetLoadProgress}%</small></section></div>}
    {openingIntro&&(()=>{const slide=prologueSlides[prologueIndex]||prologueSlides[0];return <div className={'opening-intro prologue-intro '+(prologueClosing?'prologue-closing':'')} role="dialog" aria-modal="true" aria-label="故事序章"><section className="prologue-stage" key={prologueIndex}>
     <img className="prologue-image" src={asset(slide.image)} alt="" onError={e=>{e.currentTarget.style.display='none';}}/>{slide.fadeImage&&<img className="prologue-image prologue-image-after" src={asset(slide.fadeImage)} alt="" onError={e=>{e.currentTarget.style.display='none';}}/>}<div className="prologue-vignette"/>
-    <div className="prologue-copy"><div className="prologue-text">{slide.text.map((line,index)=><p key={index} style={{'--line-index':index}}>{line.replaceAll('[[YOU]]',game.gender==='female'?'妳':'你')}</p>)}</div></div>
+    <div className="prologue-copy"><div className="prologue-text">{slide.text.map((line,index)=><p key={index} className={line.startsWith('（')?'prologue-note':line.startsWith('「')?'prologue-dialogue':'prologue-paragraph'} style={{'--line-index':index}}>{line.replaceAll('[[YOU]]',game.gender==='female'?'妳':'你').split(/(【[^】]+】)/g).map((part,partIndex)=>part.startsWith('【')&&part.endsWith('】')?<strong className="prologue-emphasis" key={partIndex}>{part.slice(1,-1)}</strong>:part)}</p>)}</div></div>
     <div className="prologue-controls"><button className="button primary" onClick={advancePrologue}>{prologueIndex===prologueSlides.length-1?'走進書店':'繼續'} <ArrowRight size={17}/></button><button className="prologue-skip" onClick={skipPrologue}>跳過序章</button></div>
    </section></div>;})()}
    {!openingIntro&&prologueClosing&&<div className="prologue-blackout" aria-hidden="true"/>}
